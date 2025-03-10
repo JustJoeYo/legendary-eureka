@@ -7,7 +7,7 @@ class BikeClub
     @name = name
     @bikers = []
     @group_rides = []
-    @@all_clubs << self # @@all_clubs is a class variable, shared among all instances of the BikeClub class (would forget if no notes forgive me mike)
+    @@all_clubs << self
   end
 
   def add_biker(biker)
@@ -43,7 +43,7 @@ class BikeClub
   end
 
   def self.best_rider(ride)
-    all_bikers = @@all_clubs.flat_map(&:bikers) # Wish i didnt have to use flat_map so soon, hasnt been long enough.
+    all_bikers = @@all_clubs.flat_map(&:bikers)
     eligible_bikers = all_bikers.select { |biker| biker.rides[ride] }
     eligible_bikers.min_by { |biker| biker.personal_record(ride) }
   end

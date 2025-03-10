@@ -113,7 +113,7 @@ RSpec.describe BikeClub do
   describe 'class variables' do
     it '@@all_clubs' do
       @bike_club = BikeClub.new("Mountain Riders") # Redefining because we reset the class variable
-      expect(BikeClub.class_variable_get(:@@all_clubs)).to eq([@bike_club]) # Could just move to the top but organization babbbyyy
+      expect(BikeClub.class_variable_get(:@@all_clubs)).to eq([@bike_club])
     end
 
     it '#best_rider' do
