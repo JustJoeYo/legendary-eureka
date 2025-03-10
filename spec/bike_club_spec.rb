@@ -11,7 +11,7 @@ RSpec.describe BikeClub do
     @biker2 = Biker.new("Athena", 15)
     @ride1 = Ride.new({name: "Walnut Creek Trail", distance: 10.7, loop: false, terrain: :hills})
     @ride2 = Ride.new({name: "Town Lake", distance: 14.9, loop: true, terrain: :gravel})
-    BikeClub.class_variable_set(:@@all_clubs, []) # for every bike club instance we make it adds to the class variable... so we need to reset it for each test
+    BikeClub.class_variable_set(:@@all_clubs, []) # For every bike club instance we make it adds to the class variable... so we need to reset it for each test
   end
 
   describe 'initialization' do
@@ -112,12 +112,12 @@ RSpec.describe BikeClub do
 
   describe 'class variables' do
     it '@@all_clubs' do
-      @bike_club = BikeClub.new("Mountain Riders") # redefining because we reset the class variable
-      expect(BikeClub.class_variable_get(:@@all_clubs)).to eq([@bike_club]) # could just move to the top but organization babbbyyy
+      @bike_club = BikeClub.new("Mountain Riders") # Redefining because we reset the class variable
+      expect(BikeClub.class_variable_get(:@@all_clubs)).to eq([@bike_club]) # Could just move to the top but organization babbbyyy
     end
 
     it '#best_rider' do
-      @bike_club = BikeClub.new("Mountain Riders") # redefining because we reset the class variable
+      @bike_club = BikeClub.new("Mountain Riders") # Redefining because we reset the class variable
       @bike_club2 = BikeClub.new("Other Riders Lol")
 
       @biker1.learn_terrain(:hills)

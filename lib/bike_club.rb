@@ -43,7 +43,7 @@ class BikeClub
   end
 
   def self.best_rider(ride)
-    all_bikers = @@all_clubs.flat_map(&:bikers) # wish i didnt have to use flat_map so soon, hasnt been long enough.
+    all_bikers = @@all_clubs.flat_map(&:bikers) # Wish i didnt have to use flat_map so soon, hasnt been long enough.
     eligible_bikers = all_bikers.select { |biker| biker.rides[ride] }
     eligible_bikers.min_by { |biker| biker.personal_record(ride) }
   end
