@@ -36,7 +36,7 @@ RSpec.describe BikeClub do
       @biker1.learn_terrain(:gravel)
       @biker1.log_ride(@ride1, 92.5)
       @biker1.log_ride(@ride1, 91.1)
-      @biker1.log_ride(@ride2, 60.9) # same data just reusing for ease
+      @biker1.log_ride(@ride2, 60.9)
       @biker1.log_ride(@ride2, 61.6)
 
       @biker2.learn_terrain(:gravel)
@@ -76,6 +76,57 @@ RSpec.describe BikeClub do
 
       expect(@bike_club.bikers_eligible(@ride1)).to eq([@biker1])
       expect(@bike_club.bikers_eligible(@ride2)).to eq([@biker1, @biker2])
+    end
+
+    it '#record_group_ride' do
+      allow(Time).to receive(:now).and_return(Time.new(2025, 3, 10, 10, 0, 0))
+      @biker1.learn_terrain(:hills)
+      @biker1.learn_terrain(:gravel)
+      @biker2.learn_terrain(:gravel)
+
+      @bike_club.add_biker(@biker1)
+      @bike_club.add_biker(@biker2)
+
+      result = @bike_club.record_group_ride(@ride1)
+      expect(result[:start_time]).to eq(Time.new(2025, 3, 10, 10, 0, 0))
+      expect(result[:ride]).to eq(@ride1)
+      expect(result[:members]).to eq([@biker1])
+    end
+
+    it '#group_rides' do
+      allow(Time).to receive(:now).and_return(Time.new(2025, 3, 10, 10, 0, 0))
+      @biker1.learn_terrain(:hills)
+      @biker1.learn_terrain(:gravel)
+      @biker2.learn_terrain(:gravel)
+
+      @bike_club.add_biker(@biker1)
+      @bike_club.add_biker(@biker2)
+
+      @bike_club.record_group_ride(@ride1)
+      @bike_club.record_group_ride(@ride2)
+
+      expect(@bike_club.group_rides.size).to eq(2)
+    end
+
+    it '::best_rider' do
+      @bike_club = BikeClub.new("Mountain Riders")
+      @bike_club2 = BikeClub.new("Other Riders Lol")
+
+      @biker1.learn_terrain(:hills)
+      @biker1.learn_terrain(:gravel)
+      @biker1.log_ride(@ride1, 92.5)
+      @biker1.log_ride(@ride1, 91.1)
+      @biker1.log_ride(@ride2, 60.9)
+      @biker1.log_ride(@ride2, 61.6)
+
+      @biker2.learn_terrain(:gravel)
+      @biker2.log_ride(@ride2, 65.0)
+
+      @bike_club1.add_biker(@biker1)
+      @bike_club2.add_biker(@biker2)
+
+      expect(BikeClub.best_rider(@ride1)).to eq(@biker1)
+      expect(BikeClub.best_rider(@ride2)).to eq(@biker1)
     end
   end
 end
