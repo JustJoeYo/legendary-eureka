@@ -47,5 +47,35 @@ RSpec.describe BikeClub do
 
       expect(@bike_club.most_rides).to eq(@biker1)
     end
+
+    it '#best_time' do
+      @biker1.learn_terrain(:hills)
+      @biker1.learn_terrain(:gravel)
+      @biker1.log_ride(@ride1, 92.5)
+      @biker1.log_ride(@ride1, 91.1)
+      @biker1.log_ride(@ride2, 60.9)
+      @biker1.log_ride(@ride2, 61.6)
+
+      @biker2.learn_terrain(:gravel)
+      @biker2.log_ride(@ride2, 65.0)
+
+      @bike_club.add_biker(@biker1)
+      @bike_club.add_biker(@biker2)
+
+      expect(@bike_club.best_time(@ride1)).to eq(@biker1)
+      expect(@bike_club.best_time(@ride2)).to eq(@biker1)
+    end
+
+    it '#bikers_eligible' do
+      @biker1.learn_terrain(:hills)
+      @biker1.learn_terrain(:gravel)
+      @biker2.learn_terrain(:gravel)
+
+      @bike_club.add_biker(@biker1)
+      @bike_club.add_biker(@biker2)
+
+      expect(@bike_club.bikers_eligible(@ride1)).to eq([@biker1])
+      expect(@bike_club.bikers_eligible(@ride2)).to eq([@biker1, @biker2])
+    end
   end
 end
