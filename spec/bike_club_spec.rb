@@ -107,9 +107,15 @@ RSpec.describe BikeClub do
 
       expect(@bike_club.group_rides.size).to eq(2)
     end
+  end
 
-    it '::best_rider' do
-      @bike_club = BikeClub.new("Mountain Riders")
+  describe 'class variables' do
+    it '@@all_clubs' do
+      expect(BikeClub.class_variable_get(:@@all_clubs)).to eq([@bike_club])
+    end
+
+    it '#best_rider' do
+      @bike_club1 = BikeClub.new("Mountain Riders")
       @bike_club2 = BikeClub.new("Other Riders Lol")
 
       @biker1.learn_terrain(:hills)
