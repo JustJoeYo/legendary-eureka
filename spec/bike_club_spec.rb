@@ -36,7 +36,7 @@ RSpec.describe BikeClub do
       @biker1.learn_terrain(:gravel)
       @biker1.log_ride(@ride1, 92.5)
       @biker1.log_ride(@ride1, 91.1)
-      @biker1.log_ride(@ride2, 60.9)
+      @biker1.log_ride(@ride2, 60.9) # same data just reusing for ease
       @biker1.log_ride(@ride2, 61.6)
 
       @biker2.learn_terrain(:gravel)
