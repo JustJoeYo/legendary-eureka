@@ -4,7 +4,7 @@ RSpec.configure do |config|
   config.formatter = :documentation
 end
 
-RSpec.describe Bike_Club do
+RSpec.describe BikeClub do
   before(:each) do
 
   end
