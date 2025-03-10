@@ -1,4 +1,4 @@
-require_relative '../lib/ride'
+require_relative 'spec_helper'
 
 RSpec.describe Ride do
   before(:each) do

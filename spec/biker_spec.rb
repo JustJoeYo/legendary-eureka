@@ -1,5 +1,4 @@
-require_relative '../lib/biker'
-require_relative '../lib/ride'
+require_relative 'spec_helper'
 
 RSpec.configure do |config|
   config.formatter = :documentation
